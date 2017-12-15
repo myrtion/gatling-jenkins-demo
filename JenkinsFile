@@ -1,0 +1,23 @@
+#!groovy
+pipeline {
+  agent any
+
+  triggers { pollSCM('H/15 * * * *') }
+  
+  stages {
+    stage('gatling') {
+    
+    steps{
+        sh mvn gatling:execute -Dgatling.useOldJenkinsJUnitSupport=true -Dgatling.simulationClass=io.gatling.jenkins.demo.SimpleSimulation`
+    }
+    
+    }
+  }
+  
+  post {
+      always {
+        junit '**/target/gatling/assertions-*.xml'
+        gatlingArchive 
+      }
+  }
+}
