@@ -8,7 +8,7 @@ pipeline {
     stage('gatling') {
     
     steps{
-        sh mvn gatling:execute -Dgatling.useOldJenkinsJUnitSupport=true -Dgatling.simulationClass=io.gatling.jenkins.demo.SimpleSimulation`
+        sh "mvn gatling:execute -Dgatling.useOldJenkinsJUnitSupport=true -Dgatling.simulationClass=io.gatling.jenkins.demo.SimpleSimulation"
     }
     
     }
